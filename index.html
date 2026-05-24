@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUTTRA // MESIN PENGHANCUR KESOMBONGAN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Horror Monochromatic Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle, #121212 0%, #050505 80%);
+            position: relative;
+        }
+        
+        /* Efek garis tv rusak/horor samar di background */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 9999;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.4s; }
+
+        /* Minimalist Dark Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        .nav-btn {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: #888;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover {
+            color: #fff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        }
+
+        /* Sections Positioning */
+        section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 10% 60px;
+            text-align: center;
+        }
+
+        /* Slide 1 - DUCK PORTE */
+        #duck-porte h1 {
+            font-size: 2.3rem;
+            letter-spacing: 5px;
+            color: #ffffff;
+            margin-bottom: 40px;
+            font-weight: 900;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+        #duck-porte .p-main {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 750px;
+            margin-bottom: 25px;
+            color: #aaa;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            letter-spacing: 1px;
+        }
+        #duck-porte p b { color: #fff; }
+
+        /* Slide 2 - LIL PORTE (Ghostly Photos) */
+        #lil-porte h2 {
+            font-size: 1.8rem;
+            letter-spacing: 4px;
+            margin-bottom: 50px;
+            color: #fff;
+        }
+        .foto-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 50px;
+            width: 100%;
+            max-width: 900px;
+        }
+        .foto-box {
+            position: relative;
+            flex: 1;
+            max-width: 280px;
+            animation: floatingHorror 4s ease-in-out infinite;
+        }
+        .foto-box:nth-child(2) {
+            animation-delay: 2s;
+        }
+        .foto-box img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(120%) brightness(80%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            transition: all 0.5s ease;
+        }
+        .foto-box img:hover {
+            filter: grayscale(100%) contrast(150%) brightness(100%);
+            border-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+        }
+
+        /* Floating Horror Animation */
+        @keyframes floatingHorror {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .bio-info {
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-block;
+        }
+        .bio-info p {
+            margin: 8px 0;
+            color: #888;
+        }
+        .bio-info b { color: #fff; }
+        .p-pro {
+            font-size: 0.9rem;
+            max-width: 500px;
+            color: #666;
+            margin-top: 15px;
+            letter-spacing: 1px;
+        }
+
+        /* Slide 3 - LAST PORTE */
+        #last-porte h2.holo-text {
+            font-size: 1.8rem;
+            letter-spacing: 6px;
+            color: #fff;
+            margin-bottom: 50px;
+        }
+        .sosmed-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .sosmed-link {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 22px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            transition: all 0.4s ease;
+        }
+        .sosmed-link:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+        .sosmed-link i {
+            font-size: 2rem;
+            color: #888;
+            transition: color 0.3s;
+        }
+        .sosmed-link:hover i {
+            color: #fff;
+        }
+        .sosmed-link h3 {
+            font-size: 1.1rem;
+            color: #fff;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+        .sosmed-link p {
+            color: #555;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            #duck-porte h1 { font-size: 1.7rem; letter-spacing: 2px; }
+            nav { gap: 15px; }
+            .nav-btn { font-size: 0.75rem; letter-spacing: 1px; }
+            .foto-container { flex-direction: column; gap: 30px; }
+            .foto-box { max-width: 70%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#duck-porte" class="nav-btn">// DUCK PORTE</a>
+            <a href="#lil-porte" class="nav-btn">// LIL PORTE</a>
+            <a href="#last-porte" class="nav-btn">// LAST PORTE</a>
+        </nav>
+    </header>
+
+    <section id="duck-porte">
+        <h1>WELCOME TO MESIN PENGHANCUR KESOMBONGAN</h1>
+        <p class="p-main">
+            <b>GW PUTTRA 🇩🇰</b>
+        </p>
+        <p class="p-main">
+            dan gw org yg paling tidak suka dengan ke semena semenaan ya itu menindas org lemah, menindas org yg miskin / terpuruk hanya karna kau lebih kaya ataupun lebih berkuasa
+        </p>
+        <p class="p-main">
+            dan satu lagi jika kamu hanya bisa menyombongkan skill temen / orang lain maka jangan pernah meninggi di depanku karna gw bisa lebih dri apa yga kau sebutin.
+        </p>
+    </section>
+
+    <section id="lil-porte">
+        <h2>// LIL PORTE</h2>
+        <div class="foto-container">
+            <div class="foto-box">
+                <img src="https://images2.imgbox.com/39/f9/G03o72R2_o.png" alt="Puttra Dark 1">
+            </div>
+            <div class="foto-box">
+                <img src="https://images2.imgbox.com/39/84/X6SAtN6z_o.png" alt="Puttra Dark 2">
+            </div>
+        </div>
+        
+        <div class="bio-info">
+            <p>NAME : <b>puttra yourfav</b></p>
+            <p>AGE : <b>20</b></p>
+            <p>FROM : <b>made in indonesian</b></p>
+        </div>
+        <p class="p-pro">gw programer pemula dan gw hanya berusaha semaksimal mungkin untuk berkembang☠️</p>
+    </section>
+
+    <section id="last-porte">
+        <h2 class="holo-text">// THE GATEWAYS</h2>
+        <div class="sosmed-grid">
+            <a href="https://chat.whatsapp.com/DjrfX7WNaJ7F6UXRdzpJIw?s=cl&p=a&mlu=0" target="_blank" class="sosmed-link">
+                <i class="fab fa-whatsapp"></i>
+                <div>
+                    <h3>WHATSAPP</h3>
+                    <p>[ ENTER THE GROUP ]</p>
+                </div>
+            </a>
+            <a href="https://t.me/zienntrezz" target="_blank" class="sosmed-link">
+                <i class="fab fa-telegram-plane"></i>
+                <div>
+                    <h3>TELEGRAM</h3>
+                    <p>[ SECURE CONNECTION ]</p>
+                </div>
+            </a>
+            <a href="https://www.tiktok.com/@gw.puttra.bray?_r=1&_t=ZS-96dNRGTfqUh" target="_blank" class="sosmed-link">
+                <i class="fab fa-tiktok"></i>
+                <div>
+                    <h3>TIKTOK</h3>
+                    <p>[ VIEW TRANSMISSION ]</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+</body>
+</html>
